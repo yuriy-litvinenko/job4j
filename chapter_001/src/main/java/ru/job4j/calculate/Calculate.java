@@ -1,6 +1,10 @@
 package ru.job4j.calculate;
 
-/** Class for "Hello World" print*/
+/** 
+ * Class for "Hello World" print
+ * @author Yuriy Litvinenko
+ * @version 1.0
+ */
 public class Calculate {
 	
 	/** 
