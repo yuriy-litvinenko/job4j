@@ -1,28 +1,14 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.job4j.calculate</groupId>
 	<artifactId>chapter_001</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 	
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<complilerVersion>1.8</complilerVersion>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<parent>
+		<groupId>ru.job4j</groupId>
+		<artifactId>job4j</artifactId>
+		<version>1.0</version>	
+	</parent>
 	
 </project>
 
