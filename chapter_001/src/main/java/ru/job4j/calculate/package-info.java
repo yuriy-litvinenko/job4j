@@ -1,8 +1,7 @@
 /**
  * Package for calculate task.
- * @author Yuriy Litvinenko (mailto:jurij.litvinenko@gmail.com)
- * @version $Id$
- * @since 0.1
+ * @author Yuriy Litvinenko
+ * @version 1.0
  */
 package ru.job4j.calculate;
 
