@@ -20,14 +20,17 @@ public class ArrayChar {
     public boolean startWith(String prefix) {
         boolean result = true;
         char[] value = prefix.toCharArray();
-        // проверить. что массив data имеет первые элементы одинаковые с value
-        for (int index = 0; index < value.length; index++) {
-            if (value[index] == data[index]) {
-                result = true;
-            } else {
-                result = false;
-                break;
+        // Проверяем, что длина префикса не превышает длину строки
+        if (data.length >= value.length) {
+            // проверить. что массив data имеет первые элементы одинаковые с value
+            for (int index = 0; index < value.length; index++) {
+                if (value[index] != data[index]) {
+                    result = false;
+                    break;
+                }
             }
+        } else {
+            result = false;
         }
         return result;
     }

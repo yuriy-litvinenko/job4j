@@ -18,4 +18,18 @@ public class ArrayCharTest {
         boolean result = word.startWith("Hi");
         assertThat(result, is(false));
     }
+
+    @Test
+    public void whenNotStartWithPrefixThenFalse2() {
+        ArrayChar word = new ArrayChar("Hello");
+        boolean result = word.startWith("Helloo");
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void whenNotStartWithPrefixThenFalse3() {
+        ArrayChar word = new ArrayChar("Hello");
+        boolean result = word.startWith("Hello");
+        assertThat(result, is(true));
+    }
 }
