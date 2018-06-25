@@ -11,14 +11,16 @@ public class MatrixCheck {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
                 if (i == j) {
-                    if (data[i][j] != value) {result = false;}
+                    if (data[i][j] != value) {
+                        result = false;
+                        break;}
                 }
                 if (j == data[i].length - i - 1) {
-                    if (data[i][j] != value) {result = false;}
+                    if (data[i][j] != value) {
+                        result = false;
+                        break;}
                 }
-                if (!result) {break;}
             }
-            if (!result) {break;}
         }
         return result;
     }
