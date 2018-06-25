@@ -30,7 +30,7 @@ public class MatrixCheckTest {
     }
 
     @Test
-    public void whenEvenDataMonoByTrueThenTrue() {
+    public void whenEvenDataMonoByFalseThenTrue() {
         MatrixCheck check = new MatrixCheck();
         boolean[][] input = new boolean[][] {
                 {false, true, true, false},
@@ -43,7 +43,7 @@ public class MatrixCheckTest {
     }
 
     @Test
-    public void whenEvenDataNotMonoByTrueThenFalse() {
+    public void whenEvenDataNotMonoByFalseThenFalse() {
         MatrixCheck check = new MatrixCheck();
         boolean[][] input = new boolean[][] {
                 {false, true, true, false},
