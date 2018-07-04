@@ -1,7 +1,7 @@
 package ru.job4j.oop;
 
-public class Teacher {
-    public void teachStudent(Student student) {
-
+public class Teacher extends Profession {
+    public Specialist teachStudent(Student student) {
+        return new Specialist();
     }
 }

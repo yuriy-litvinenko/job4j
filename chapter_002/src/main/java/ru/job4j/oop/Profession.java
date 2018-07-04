@@ -1,5 +1,8 @@
 package ru.job4j.oop;
 
-public class Profession {
+class Profession {
     String name, prof;
+    String getName() {
+        return name;
+    }
 }
