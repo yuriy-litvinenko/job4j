@@ -7,8 +7,7 @@ import static org.junit.Assert.assertThat;
 public class ProfessionTest {
     @Test
     public void getNameForDoctorClass() {
-        Doctor doctor = new Doctor();
-        doctor.name = "House";
+        Doctor doctor = new Doctor("House");
         String result = doctor.getName();
         String expect = "House";
         assertThat(result, is(expect));
@@ -16,8 +15,7 @@ public class ProfessionTest {
 
     @Test
     public void getNameForEngeneerClass() {
-        Engineer engineer = new Engineer();
-        engineer.name = "Steve Jobs";
+        Engineer engineer = new Engineer("Steve Jobs");
         String result = engineer.getName();
         String expect = "Steve Jobs";
         assertThat(result, is(expect));
@@ -25,8 +23,7 @@ public class ProfessionTest {
 
     @Test
     public void getNameForTeacherClass() {
-        Teacher teacher = new Teacher();
-        teacher.name = "Nestor Petrovich";
+        Teacher teacher = new Teacher("Nestor Petrovich");
         String result = teacher.getName();
         String expect = "Nestor Petrovich";
         assertThat(result, is(expect));

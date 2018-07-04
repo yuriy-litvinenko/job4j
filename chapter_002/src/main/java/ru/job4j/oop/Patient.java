@@ -1,5 +1,5 @@
 package ru.job4j.oop;
 
-public class Patient {
-    String name;
+class Patient {
+    private String name;
 }

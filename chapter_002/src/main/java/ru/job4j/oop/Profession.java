@@ -1,7 +1,12 @@
 package ru.job4j.oop;
 
 class Profession {
-    String name, prof;
+    private String name, prof;
+
+    Profession(String name) {
+        this.name = name;
+    }
+
     String getName() {
         return name;
     }
