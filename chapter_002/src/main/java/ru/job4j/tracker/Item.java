@@ -21,6 +21,11 @@ public class Item {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "ID заявки: " + this.getId() + "\nИмя заявки: " + this.getName() + "\nОписание заявки: " + this.getDescription() + "\n--------------------------------------------------";
+    }
+
     public String getName() {
         return this.name;
     }

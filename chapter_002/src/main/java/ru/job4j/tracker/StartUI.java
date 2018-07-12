@@ -54,10 +54,7 @@ public class StartUI {
         System.out.println("------------ Список имеющихся заявок --------------");
         Item[] result = this.tracker.getAll();
         for (Item item : result) {
-            System.out.println("ID заявки: " + item.getId());
-            System.out.println("Имя заявки: " + item.getName());
-            System.out.println("Описание заявки: " + item.getDescription());
-            System.out.println("---------------------------------------------------");
+            System.out.println(item);
         }
     }
 
@@ -92,9 +89,7 @@ public class StartUI {
             System.out.println("---------- Заявка с данным идентификатором не найдена -----------");
         } else {
             System.out.println("---------- Данные по заявке -----------");
-            System.out.println("ID заявки: " + item.getId());
-            System.out.println("Имя заявки: " + item.getName());
-            System.out.println("Описание заявки: " + item.getDescription());
+            System.out.println(item);
         }
     }
 
@@ -107,10 +102,7 @@ public class StartUI {
         } else {
             System.out.println("---------- Найденные заявки -----------");
             for (Item item : items) {
-                System.out.println("ID заявки: " + item.getId());
-                System.out.println("Имя заявки: " + item.getName());
-                System.out.println("Описание заявки: " + item.getDescription());
-                System.out.println("--------------------------------------------------");
+                System.out.println(item);
             }
         }
     }
