@@ -7,9 +7,10 @@ class Tracker {
     private int position = 0;
     private static final Random RN = new Random();
 
-    public void add(Item item) {
+    public Item add(Item item) {
         item.setId(this.generateId());
         this.items[this.position++] = item;
+        return item;
     }
 
     public boolean replace(String id, Item item) {
