@@ -23,7 +23,13 @@ public class Item {
 
     @Override
     public String toString() {
-        return "ID заявки: " + this.getId() + "\nИмя заявки: " + this.getName() + "\nОписание заявки: " + this.getDescription() + "\n--------------------------------------------------";
+        return "ID заявки: " + this.getId() +
+                System.lineSeparator() +
+                "Имя заявки: " + this.getName() +
+                System.lineSeparator() +
+                "Описание заявки: " + this.getDescription() +
+                System.lineSeparator() +
+                "--------------------------------------------------";
     }
 
     public String getName() {
