@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.nullValue;
 public class StartUITest {
     private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private final StringBuilder MenuString = new StringBuilder()
+    private final StringBuilder menu = new StringBuilder()
             .append("Меню.")
             .append(System.lineSeparator())
             .append("0 - Добавить новую заявку")
@@ -84,14 +84,14 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MenuString)
+                                .append(menu)
                                 .append("------------ Список имеющихся заявок --------------")
                                 .append(System.lineSeparator())
                                 .append(item1)
                                 .append(System.lineSeparator())
                                 .append(item2)
                                 .append(System.lineSeparator())
-                                .append(MenuString)
+                                .append(menu)
                                 .toString()
                 )
         );
@@ -107,14 +107,14 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MenuString)
+                                .append(menu)
                                 .append("---------- Поиск заявки по идентификатору -----------")
                                 .append(System.lineSeparator())
                                 .append("---------- Данные по заявке -----------")
                                 .append(System.lineSeparator())
                                 .append(item)
                                 .append(System.lineSeparator())
-                                .append(MenuString)
+                                .append(menu)
                                 .toString()
                 )
         );
@@ -131,7 +131,7 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MenuString)
+                                .append(menu)
                                 .append("---------- Поиск заявки по имени -----------")
                                 .append(System.lineSeparator())
                                 .append("---------- Найденные заявки -----------")
@@ -140,7 +140,7 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append(item2)
                                 .append(System.lineSeparator())
-                                .append(MenuString)
+                                .append(menu)
                                 .toString()
                 )
         );
