@@ -10,7 +10,6 @@ public class StartUI {
     private static final String EXIT = "6";
 
     private final Input input;
-
     private final Tracker tracker;
 
     public StartUI(Input input, Tracker tracker) {
@@ -23,9 +22,13 @@ public class StartUI {
         menu.fillActions();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Select: "));
-            menu.select(key);
+            int[] ranges = menu.getActionsKeys();
+            menu.select(input.ask("select: ", ranges));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
+    }
+
+    public static void main(String[] args) {
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 
     private void createItem() {
@@ -103,9 +106,5 @@ public class StartUI {
         System.out.println("4 - Найти заявку по идентификатору");
         System.out.println("5 - Найти заявку по имени");
         System.out.println("6 - Выйти из программы");
-    }
-
-    public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
     }
 }

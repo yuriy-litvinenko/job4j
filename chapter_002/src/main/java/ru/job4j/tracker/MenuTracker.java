@@ -5,6 +5,14 @@ public class MenuTracker {
     private Tracker tracker;
     private UserAction[] actions = new UserAction[6];
 
+    public int[] getActionsKeys() {
+        int[] actionsKey = new int[actions.length];
+        for (int index = 0; index < actions.length; index++) {
+            actionsKey[index] = actions[index].key();
+        }
+        return actionsKey;
+    }
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
