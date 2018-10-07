@@ -28,9 +28,9 @@ public class BishopWhite implements Figure {
         if (!isDiagonal(source, dest)) {
             throw new ImpossibleMoveException("Not diagonal move.");
         } else {
-            steps = new Cell[size];
-            for (int index = 0; index < size; index++) {
-                steps[index] = getCell(source.x + deltaX + index, source.y + deltaY + index);
+            steps = new Cell[Math.abs(size)];
+            for (int index = 0; index < steps.length; index++) {
+                steps[index] = getCell(source.x + deltaX - index, source.y + deltaY - index);
             }
         }
         return steps;
@@ -44,24 +44,24 @@ public class BishopWhite implements Figure {
     public boolean isDiagonal(Cell source, Cell dest) {
         boolean rst = false;
         size = source.x - dest.x;
-        if (source.x == dest.x + size & source.y == dest.y + size) {
-            deltaX = 1;
-            deltaY = 1;
-            rst = true;
-        }
-        if (source.x == dest.x + size & source.y == dest.y - size) {
-            deltaX = 1;
+        if (source.x > dest.x & source.y > dest.y) {
+            deltaX = -1;
             deltaY = -1;
             rst = true;
         }
-        if (source.x == dest.x - size & source.y == dest.y + size) {
+        if (source.x > dest.x & source.y < dest.y) {
             deltaX = -1;
             deltaY = 1;
             rst = true;
         }
-        if (source.x == dest.x - size & source.y == dest.y - size) {
-            deltaX = -1;
+        if (source.x < dest.x & source.y > dest.y) {
+            deltaX = 1;
             deltaY = -1;
+            rst = true;
+        }
+        if (source.x < dest.x & source.y < dest.y) {
+            deltaX = 1;
+            deltaY = 1;
             rst = true;
         }
 //        if ((source.y == dest.y + size & source.x == dest.x + size)
