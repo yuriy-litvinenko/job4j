@@ -24,6 +24,7 @@ public class Logic {
         try {
             int index = this.findBy(source);
             Cell[] steps = this.figures[index].way(source, dest);
+            stepsValidate(steps);
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
@@ -32,6 +33,8 @@ public class Logic {
             System.out.println("Figure not found.");
         } catch (ImpossibleMoveException ime) {
             System.out.println("This is impossible move.");
+        } catch (OccupiedWayException owe) {
+            System.out.println("Figure Way is occupied.");
         }
         return rst;
     }
@@ -51,9 +54,17 @@ public class Logic {
                 break;
             }
         }
-        if (rst == -1) {
-            throw new FigureNotFoundException("Out of range.");
-        }
+//        if (rst == -1) {
+//            throw new FigureNotFoundException("Out of range.");
+//        }
         return rst;
+    }
+
+    private void stepsValidate(Cell[] steps) {
+        for (int index = 0; index < steps.length; index++) {
+            if (findBy(steps[index]) != -1) {
+                throw new OccupiedWayException("Array has not empty cells.");
+            }
+        }
     }
 }
