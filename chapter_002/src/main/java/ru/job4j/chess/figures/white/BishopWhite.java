@@ -29,8 +29,8 @@ public class BishopWhite implements Figure {
             throw new ImpossibleMoveException("Not diagonal move.");
         } else {
             steps = new Cell[Math.abs(size)];
-            for (int index = 0; index < steps.length; index++) {
-                steps[index] = getCell(source.x + deltaX - index, source.y + deltaY - index);
+            for (int index = 0, stepX = deltaX, stepY = deltaY; index < steps.length; index++, stepX = stepX + deltaX, stepY = stepY + deltaY) {
+                steps[index] = getCell(source.x + stepX, source.y + stepY);
             }
         }
         return steps;
@@ -64,13 +64,6 @@ public class BishopWhite implements Figure {
             deltaY = 1;
             rst = true;
         }
-//        if ((source.y == dest.y + size & source.x == dest.x + size)
-//                || (source.y == dest.y + size & source.x == dest.x - size)
-//                || (source.y == dest.y - size & source.x == dest.x + size)
-//                || (source.y == dest.y - size & source.x == dest.x - size)
-//                ) {
-//            rst = true;
-//        }
         return rst;
     }
 

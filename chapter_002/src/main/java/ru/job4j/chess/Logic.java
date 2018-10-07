@@ -23,6 +23,7 @@ public class Logic {
         boolean rst = false;
         try {
             int index = this.findBy(source);
+            figureCheck(index);
             Cell[] steps = this.figures[index].way(source, dest);
             stepsValidate(steps);
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
@@ -54,17 +55,20 @@ public class Logic {
                 break;
             }
         }
-//        if (rst == -1) {
-//            throw new FigureNotFoundException("Out of range.");
-//        }
         return rst;
     }
 
     private void stepsValidate(Cell[] steps) {
-        for (int index = 0; index < steps.length; index++) {
-            if (findBy(steps[index]) != -1) {
+        for (Cell cell : steps) {
+            if (findBy(cell) != -1) {
                 throw new OccupiedWayException("Array has not empty cells.");
             }
+        }
+    }
+
+    private void figureCheck(int index) {
+        if (index == -1) {
+            throw new FigureNotFoundException("Out of range.");
         }
     }
 }
