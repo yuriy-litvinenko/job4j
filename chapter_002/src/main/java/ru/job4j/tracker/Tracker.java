@@ -46,6 +46,7 @@ class Tracker {
         for (Item item : items) {
             if (item.getId().equals(id)) {
                 result = item;
+                break;
             }
         }
         return result;
