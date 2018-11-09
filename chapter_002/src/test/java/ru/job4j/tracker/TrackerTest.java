@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -10,7 +13,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        assertThat(tracker.getAll()[0], is(item));
+        assertThat(tracker.getAll().get(0), is(item));
     }
 
     @Test
@@ -37,8 +40,8 @@ public class TrackerTest {
         Tracker expect = new Tracker();
         expect.add(item1);
         expect.add(item3);
-        for (int index = 0; index != expect.getAll().length; index++) {
-            assertThat(result.getAll()[index], is(expect.getAll()[index]));
+        for (int index = 0; index != expect.getAll().size(); index++) {
+            assertThat(result.getAll().get(index), is(expect.getAll().get(index)));
         }
     }
 
@@ -51,9 +54,9 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        assertThat(tracker.getAll()[0].getName(), is(item1.getName()));
-        assertThat(tracker.getAll()[1].getName(), is(item2.getName()));
-        assertThat(tracker.getAll()[2].getName(), is(item3.getName()));
+        assertThat(tracker.getAll().get(0).getName(), is(item1.getName()));
+        assertThat(tracker.getAll().get(1).getName(), is(item2.getName()));
+        assertThat(tracker.getAll().get(2).getName(), is(item3.getName()));
     }
 
     @Test
@@ -65,9 +68,9 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        Item[] result = tracker.findByName(item1.getName());
-        assertThat(result[0].getName(), is("test1"));
-        assertThat(result[1].getName(), is("test1"));
+        List<Item> result = tracker.findByName(item1.getName());
+        assertThat(result.get(0).getName(), is("test1"));
+        assertThat(result.get(1).getName(), is("test1"));
     }
 
     @Test

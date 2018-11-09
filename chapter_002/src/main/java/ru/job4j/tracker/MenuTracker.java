@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
@@ -136,8 +138,8 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("---------- Поиск заявки по имени -----------");
             String name = input.ask("Введите имя заявки: ");
-            Item[] items = tracker.findByName(name);
-            if (items.length == 0) {
+            List<Item> items = tracker.findByName(name);
+            if (items.size() == 0) {
                 System.out.println("--------- Заявки с данным наименованием не найдены -----------");
             } else {
                 System.out.println("---------- Найденные заявки -----------");
