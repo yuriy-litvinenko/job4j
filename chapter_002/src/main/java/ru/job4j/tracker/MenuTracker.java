@@ -1,16 +1,17 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[6];
+    private List<UserAction> actions = new ArrayList<>();
 
     public int[] getActionsKeys() {
-        int[] actionsKey = new int[actions.length];
-        for (int index = 0; index < actions.length; index++) {
-            actionsKey[index] = actions[index].key();
+        int[] actionsKey = new int[actions.size()];
+        for (int index = 0; index < actions.size(); index++) {
+            actionsKey[index] = actions.get(index).key();
         }
         return actionsKey;
     }
@@ -21,16 +22,16 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.actions[0] = new MenuTracker.AddItem(0, "Добавить новую заявку");
-        this.actions[1] = new MenuTracker.ShowItems(1, "Показать все заявки");
-        this.actions[2] = new MenuTracker.EditItem(2, "Редактировать заявку");
-        this.actions[3] = new MenuTracker.DeleteItem(3, "Удалить заявку");
-        this.actions[4] = new MenuTracker.FindItemById(4, "Найти заявку по идентификатору");
-        this.actions[5] = new MenuTracker.FindItemByName(5, "Найти заявку по имени");
+        this.actions.add(new MenuTracker.AddItem(0, "Добавить новую заявку"));
+        this.actions.add(new MenuTracker.ShowItems(1, "Показать все заявки"));
+        this.actions.add(new MenuTracker.EditItem(2, "Редактировать заявку"));
+        this.actions.add(new MenuTracker.DeleteItem(3, "Удалить заявку"));
+        this.actions.add(new MenuTracker.FindItemById(4, "Найти заявку по идентификатору"));
+        this.actions.add(new MenuTracker.FindItemByName(5, "Найти заявку по имени"));
     }
 
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     public void show() {
@@ -64,7 +65,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
-                System.out.println(String.format("%s. %s, %s.", item.getId(), item.getName(), item.getDescription()));
+                System.out.println(item);
             }
         }
     }
