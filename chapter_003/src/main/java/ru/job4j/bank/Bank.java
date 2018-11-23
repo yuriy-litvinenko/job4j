@@ -13,6 +13,10 @@ public class Bank {
         this.base.remove(user);
     }
 
+    public Set<User> getUsers() {
+        return base.keySet();
+    }
+
     public void addAccountToUser(String passport, Account account) {
         for (User user : base.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -29,7 +33,7 @@ public class Bank {
         }
     }
 
-    public List<Account> getUserAccounts (String passport) {
+    public List<Account> getUserAccounts(String passport) {
         List<Account> result = null;
         for (User user : base.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -39,7 +43,7 @@ public class Bank {
         return result;
     }
 
-    public Account getAccount (List<Account> accounts, String requisite) {
+    public Account getAccount(List<Account> accounts, String requisite) {
         Account result = null;
         for (Account account : accounts) {
             if (account.getRequisites().equals(requisite)) {
@@ -49,7 +53,7 @@ public class Bank {
         return result;
     }
 
-    public boolean transferMoney (String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
         boolean result;
         Account srcAcc = getAccount(getUserAccounts(srcPassport), srcRequisite);
         Account destAcc = getAccount(getUserAccounts(destPassport), destRequisite);
