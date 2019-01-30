@@ -54,10 +54,15 @@ public class Bank {
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
-        boolean result;
-        Account srcAcc = getAccount(getUserAccounts(srcPassport), srcRequisite);
-        Account destAcc = getAccount(getUserAccounts(destPassport), destRequisite);
-        result = srcAcc.transfer(destAcc, amount);
+        boolean result = false;
+        try {
+            Account srcAcc = getAccount(getUserAccounts(srcPassport), srcRequisite);
+            Account destAcc = getAccount(getUserAccounts(destPassport), destRequisite);
+            result = srcAcc.transfer(destAcc, amount);
+        }
+        catch (NullPointerException npe) {
+            System.out.println("Неверно указаны реквизиты отправителя или получателя перевода!");
+        }
         return result;
     }
 }
