@@ -45,9 +45,11 @@ public class Bank {
 
     public Account getAccount(List<Account> accounts, String requisite) {
         Account result = null;
-        for (Account account : accounts) {
-            if (account.getRequisites().equals(requisite)) {
-                result = account;
+        if (accounts != null) {
+            for (Account account : accounts) {
+                if (account.getRequisites().equals(requisite)) {
+                    result = account;
+                }
             }
         }
         return result;
@@ -55,13 +57,10 @@ public class Bank {
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
         boolean result = false;
-        try {
-            Account srcAcc = getAccount(getUserAccounts(srcPassport), srcRequisite);
-            Account destAcc = getAccount(getUserAccounts(destPassport), destRequisite);
+        Account srcAcc = getAccount(getUserAccounts(srcPassport), srcRequisite);
+        Account destAcc = getAccount(getUserAccounts(destPassport), destRequisite);
+        if (srcAcc != null && destAcc != null) {
             result = srcAcc.transfer(destAcc, amount);
-        }
-        catch (NullPointerException npe) {
-            System.out.println("Неверно указаны реквизиты отправителя или получателя перевода!");
         }
         return result;
     }
