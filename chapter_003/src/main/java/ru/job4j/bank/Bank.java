@@ -34,23 +34,13 @@ public class Bank {
     }
 
     public List<Account> getUserAccounts(String passport) {
-        List<Account> result = null;
-        for (User user : base.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                result = base.get(user);
-            }
-        }
-        return result;
+        return base.keySet().stream().filter(p -> passport.equals(p.getPassport())).map(u -> base.get(u)).findFirst().orElse(null);
     }
 
     public Account getAccount(List<Account> accounts, String requisite) {
         Account result = null;
         if (accounts != null) {
-            for (Account account : accounts) {
-                if (account.getRequisites().equals(requisite)) {
-                    result = account;
-                }
-            }
+            result = accounts.stream().filter(r -> requisite.equals(r.getRequisites())).findFirst().orElse(null);
         }
         return result;
     }
