@@ -32,7 +32,7 @@ public class ConvertList2ArrayTest {
         list.add(new int[]{3, 4, 5, 6});
         ConvertList2Array convertList = new ConvertList2Array();
         List<Integer> result = convertList.convert(list);
-        List<Integer> expect = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6);
         assertThat(result, is(expect));
     }
 }
