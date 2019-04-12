@@ -8,7 +8,7 @@ public class Converter {
             private Iterator<Integer> itTmp = new ArrayList<Integer>().iterator();
 
             private void nextCheck() {
-                if (!itTmp.hasNext() && it.hasNext()) {
+                while (!itTmp.hasNext() && it.hasNext()) {
                     itTmp = it.next();
                 }
             }
