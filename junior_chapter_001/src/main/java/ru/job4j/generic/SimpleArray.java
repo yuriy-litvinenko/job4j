@@ -11,6 +11,10 @@ public class SimpleArray<T> implements Iterable {
         this.objects = new Object[size];
     }
 
+    public int length() {
+        return pos;
+    }
+
     public void add(T model) {
         if (pos < objects.length) {
             objects[pos++] = model;
@@ -24,14 +28,14 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void remove(int index) {
-        if (index < objects.length) {
+        if (index < pos) {
             System.arraycopy(objects, index + 1, objects, index, objects.length - 1 - index);
             pos--;
         }
     }
 
     public T get(int index) {
-        if (index < objects.length) {
+        if (index < pos) {
             return (T) objects[index];
         }
         return null;
