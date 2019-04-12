@@ -18,17 +18,14 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void set(int index, T model) {
-        if (index < objects.length) {
+        if (index < pos) {
             objects[index] = model;
         }
     }
 
     public void remove(int index) {
         if (index < objects.length) {
-            for (int i = index; i <= objects.length - 2; i++) {
-                objects[i] = objects[i + 1];
-                objects[i + 1] = null;
-            }
+            System.arraycopy(objects, index + 1, objects, index, objects.length - 1 - index);
             pos--;
         }
     }

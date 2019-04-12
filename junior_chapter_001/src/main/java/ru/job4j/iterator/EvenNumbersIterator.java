@@ -18,23 +18,20 @@ public class EvenNumbersIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        for (int indexTmp = index; indexTmp != values.length; indexTmp++) {
-            if (isEven(values[indexTmp])) {
+        while (index != values.length) {
+            if (isEven(values[index])) {
                 return true;
             }
+            index++;
         }
         return false;
     }
 
     @Override
     public Object next() {
-        while (index != values.length) {
-            if (isEven(values[index])) {
-                return values[index++];
-            } else {
-                index++;
-            }
+        if (!hasNext()) {
+            throw new NoSuchElementException();
         }
-        throw new NoSuchElementException();
+        return values[index++];
     }
 }
