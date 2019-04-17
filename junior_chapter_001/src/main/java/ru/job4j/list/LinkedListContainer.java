@@ -1,36 +1,35 @@
 package ru.job4j.list;
 
-import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedListContainer<E> implements Iterable<E> {
-    private Node[] container = new Node[2];
-    private Node lastNode;
-    private int pos = 0;
+
+    private Node<E> firstNode;
+    private Node<E> lastNode;
+    private int size = 0;
     private int modCount = 0;
 
-    private void checkLength() {
-        if (pos == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
-        }
-    }
-
     public void add(E value) {
-        checkLength();
-        Node tmpNode = new Node(value);
-        if (lastNode != null) {
-            lastNode.next = tmpNode;
+        Node<E> newNode = new Node(value, lastNode, null);
+        if (size == 0) {
+            firstNode = newNode;
+            lastNode = newNode;
         }
-        lastNode = tmpNode;
-        container[pos++] = lastNode;
+        lastNode.next = newNode;
+        lastNode = newNode;
+        size++;
         modCount++;
     }
 
     public E get(int index) {
-        if (index < pos) {
-            return (E) container[index].date;
+        if (index < size) {
+            Node<E> resultNode = firstNode;
+            for (int i = 0; i < index; i++) {
+                resultNode = resultNode.next;
+            }
+            return resultNode.value;
         }
         return null;
     }
@@ -46,7 +45,7 @@ public class LinkedListContainer<E> implements Iterable<E> {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
-                return posIt < pos;
+                return posIt < size;
             }
 
             @Override
@@ -54,20 +53,20 @@ public class LinkedListContainer<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (E) container[posIt++].date;
+                return get(posIt++);
             }
         };
     }
 
-    private class Node<E> {
-        E date;
-        Node prev;
+    private static class Node<E> {
+        E value;
         Node next;
+        Node prev;
 
-        Node(E date) {
-            this.date = date;
-            prev = lastNode;
-            next = null;
+        Node(E date, Node prev, Node next) {
+            this.value = date;
+            this.prev = prev;
+            this.next = next;
         }
     }
 }
