@@ -6,6 +6,10 @@ public class SimpleStack<T> {
     private int size;
     private Node<T> first;
 
+    public int getSize() {
+        return size;
+    }
+
     public T poll() {
         if (size > 0) {
             Node<T> pollLink = this.first;
