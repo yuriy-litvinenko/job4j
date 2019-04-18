@@ -12,7 +12,7 @@ public class LinkedListContainer<E> implements Iterable<E> {
     private int modCount = 0;
 
     public void add(E value) {
-        Node<E> newNode = new Node(value, lastNode, null);
+        Node<E> newNode = new Node<>(value, lastNode, null);
         if (size == 0) {
             firstNode = newNode;
             lastNode = newNode;
@@ -23,15 +23,32 @@ public class LinkedListContainer<E> implements Iterable<E> {
         modCount++;
     }
 
-    public E get(int index) {
+    private Node<E> getNode(int index) {
         if (index < size) {
             Node<E> resultNode = firstNode;
             for (int i = 0; i < index; i++) {
                 resultNode = resultNode.next;
             }
-            return resultNode.value;
+            return resultNode;
         }
-        return null;
+        throw new IndexOutOfBoundsException();
+    }
+
+    public E remove(int index) {
+        Node<E> remNode = getNode(index);
+        if (remNode.prev != null) {
+            remNode.prev.next = remNode.next;
+        }
+        if (remNode.next != null) {
+            remNode.next.prev = remNode.prev;
+        }
+        size--;
+        modCount++;
+        return remNode.value;
+    }
+
+    public E get(int index) {
+        return getNode(index).value;
     }
 
     @Override
@@ -60,10 +77,10 @@ public class LinkedListContainer<E> implements Iterable<E> {
 
     private static class Node<E> {
         E value;
-        Node next;
-        Node prev;
+        Node<E> next;
+        Node<E> prev;
 
-        Node(E date, Node prev, Node next) {
+        Node(E date, Node<E> prev, Node<E> next) {
             this.value = date;
             this.prev = prev;
             this.next = next;

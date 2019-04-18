@@ -7,11 +7,10 @@ import java.util.Iterator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 
 public class LinkedListContainerTest {
-    @Test
-    public void addAndGetIntegerValuesFromLinkedList() {
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addGetAndRemoveIntegerValuesFromLinkedListAndThrowException() {
         LinkedListContainer<Integer> linkedListContainer = new LinkedListContainer<>();
         linkedListContainer.add(1);
         linkedListContainer.add(2);
@@ -20,7 +19,9 @@ public class LinkedListContainerTest {
         linkedListContainer.add(5);
         assertThat(linkedListContainer.get(0), is(1));
         assertThat(linkedListContainer.get(3), is(4));
-        assertThat(linkedListContainer.get(5), is(nullValue()));
+        assertThat(linkedListContainer.remove(3), is(4));
+        assertThat(linkedListContainer.get(3), is(5));
+        linkedListContainer.get(5);
     }
 
     @Test(expected = ConcurrentModificationException.class)
