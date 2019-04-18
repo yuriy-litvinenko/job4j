@@ -55,14 +55,14 @@ public class LinkedListContainer<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         return new Iterator<>() {
             int expectedModCount = modCount;
-            int posIt = 0;
+            Node<E> cursorNode = firstNode;
 
             @Override
             public boolean hasNext() {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
-                return posIt < size;
+                return cursorNode != null;
             }
 
             @Override
@@ -70,7 +70,9 @@ public class LinkedListContainer<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return get(posIt++);
+                Node<E> returnNode = cursorNode;
+                cursorNode = cursorNode.next;
+                return returnNode.value;
             }
         };
     }
