@@ -6,6 +6,10 @@ public class SimpleStack<T> {
     private LinkedListContainer<T> container = new LinkedListContainer<>();
     private int pos;
 
+    public int getSize() {
+        return pos;
+    }
+
     public T poll() {
         if (pos > 0) {
             return container.remove(pos-- - 1);
