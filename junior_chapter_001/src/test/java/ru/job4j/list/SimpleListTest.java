@@ -9,32 +9,32 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
-public class DynamicArrayTest {
+public class SimpleListTest {
 
     @Test
     public void addAndGetValuesFromDynamicArray() {
-        DynamicArray<Integer> dynamicArray = new DynamicArray<>();
-        dynamicArray.add(1);
-        dynamicArray.add(2);
-        dynamicArray.add(3);
-        dynamicArray.add(4);
-        dynamicArray.add(5);
-        assertThat(dynamicArray.get(4), is(5));
-        assertThat(dynamicArray.get(5), is(nullValue()));
+        SimpleList<Integer> simpleList = new SimpleList<>();
+        simpleList.add(1);
+        simpleList.add(2);
+        simpleList.add(3);
+        simpleList.add(4);
+        simpleList.add(5);
+        assertThat(simpleList.get(4), is(5));
+        assertThat(simpleList.get(5), is(nullValue()));
     }
 
     @Test(expected = ConcurrentModificationException.class)
     public void getArrayValuesWithIteratorAndThrowException() {
-        DynamicArray<Integer> dynamicArray = new DynamicArray<>();
-        dynamicArray.add(1);
-        dynamicArray.add(2);
-        Iterator it = dynamicArray.iterator();
+        SimpleList<Integer> simpleList = new SimpleList<>();
+        simpleList.add(1);
+        simpleList.add(2);
+        Iterator it = simpleList.iterator();
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(2));
         assertThat(it.hasNext(), is(false));
-        dynamicArray.add(3);
+        simpleList.add(3);
         it.next();
     }
 }

@@ -5,7 +5,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class DynamicArray<E> implements Iterable {
+public class SimpleList<E> implements Iterable<E> {
     private Object[] container = new Object[2];
     private int pos = 0;
     private int modCount = 0;
@@ -30,8 +30,8 @@ public class DynamicArray<E> implements Iterable {
     }
 
     @Override
-    public Iterator iterator() {
-        return new Iterator() {
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
             int expectedModCount = modCount;
             int posIt = 0;
 
@@ -44,11 +44,11 @@ public class DynamicArray<E> implements Iterable {
             }
 
             @Override
-            public Object next() {
+            public E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return container[posIt++];
+                return (E) container[posIt++];
             }
         };
     }

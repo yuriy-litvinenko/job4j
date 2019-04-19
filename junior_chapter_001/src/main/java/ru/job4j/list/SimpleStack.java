@@ -3,7 +3,7 @@ package ru.job4j.list;
 import java.util.NoSuchElementException;
 
 public class SimpleStack<T> {
-    private LinkedListContainer<T> container = new LinkedListContainer<>();
+    private SimpleLinkedList<T> container = new SimpleLinkedList<>();
     private int pos;
 
     public int getSize() {
