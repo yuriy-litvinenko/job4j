@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class MenuTracker {
+class MenuTracker {
     private Input input;
-    private Tracker tracker;
+    private ITracker tracker;
     private List<UserAction> actions = new ArrayList<>();
     private final Consumer<String> output;
 
-    public int[] getActionsKeys() {
+    int[] getActionsKeys() {
         int[] actionsKey = new int[actions.size()];
         for (int index = 0; index < actions.size(); index++) {
             actionsKey[index] = actions.get(index).key();
@@ -18,13 +18,13 @@ public class MenuTracker {
         return actionsKey;
     }
 
-    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
+    MenuTracker(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
     }
 
-    public void fillActions() {
+    void fillActions() {
         this.actions.add(new MenuTracker.AddItem(0, "Добавить новую заявку"));
         this.actions.add(new MenuTracker.ShowItems(1, "Показать все заявки"));
         this.actions.add(new MenuTracker.EditItem(2, "Редактировать заявку"));
@@ -33,11 +33,11 @@ public class MenuTracker {
         this.actions.add(new MenuTracker.FindItemByName(5, "Найти заявку по имени"));
     }
 
-    public void select(int key) {
+    void select(int key) {
         this.actions.get(key).execute(this.input, this.tracker);
     }
 
-    public void show() {
+    void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
                 output.accept(action.info());
@@ -47,12 +47,12 @@ public class MenuTracker {
 
     private static class AddItem extends BaseAction {
 
-        public AddItem(int key, String name) {
+        AddItem(int key, String name) {
             super(key, name);
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Введите имя заявки :");
             String desc = input.ask("Введите описание заявки :");
             tracker.add(new Item(name, desc));
@@ -61,12 +61,12 @@ public class MenuTracker {
 
     private class ShowItems extends BaseAction {
 
-        public ShowItems(int key, String name) {
+        ShowItems(int key, String name) {
             super(key, name);
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             for (Item item : tracker.getAll()) {
                 output.accept(item.toString());
             }
@@ -75,12 +75,12 @@ public class MenuTracker {
 
     private class EditItem extends BaseAction {
 
-        public EditItem(int key, String name) {
+        EditItem(int key, String name) {
             super(key, name);
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             output.accept("------------ Редактирование новой заявки --------------");
             String id = input.ask("Введите идентификатор заявки: ");
             String name = input.ask("Введите новое имя заявки: ");
@@ -96,12 +96,12 @@ public class MenuTracker {
 
     private class DeleteItem extends BaseAction {
 
-        public DeleteItem(int key, String name) {
+        DeleteItem(int key, String name) {
             super(key, name);
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             output.accept("------------ Удаление заявки --------------");
             String id = input.ask("Введите идентификатор заявки: ");
             if (tracker.delete(id)) {
@@ -114,12 +114,12 @@ public class MenuTracker {
 
     private class FindItemById extends BaseAction {
 
-        public FindItemById(int key, String name) {
+        FindItemById(int key, String name) {
             super(key, name);
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             output.accept("---------- Поиск заявки по идентификатору -----------");
             String id = input.ask("Введите идентификатор заявки: ");
             Item item = tracker.findById(id);
@@ -134,12 +134,12 @@ public class MenuTracker {
 
     private class FindItemByName extends BaseAction {
 
-        public FindItemByName(int key, String name) {
+        FindItemByName(int key, String name) {
             super(key, name);
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             output.accept("---------- Поиск заявки по имени -----------");
             String name = input.ask("Введите имя заявки: ");
             List<Item> items = tracker.findByName(name);

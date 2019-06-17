@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.*;
 
-class Tracker {
+class Tracker implements ITracker {
     private final List<Item> items = new ArrayList<>();
     private static final Random RN = new Random();
 
