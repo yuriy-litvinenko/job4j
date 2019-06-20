@@ -6,6 +6,12 @@ sudo: false
 jdk:
   - oraclejdk11
 
+services:
+  - postgresql
+
+before_script:
+  - psql -c "create database tracker;" -U postgres
+
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
@@ -15,6 +21,6 @@ after_success:
 notifications:
   email:
     recipients:
-      - jurij.litivnenko@gmail.com
+      - jurij.litvinenko@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
