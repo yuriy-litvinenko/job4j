@@ -1,3 +1,5 @@
+package ru.job4j.jdbc;
+
 import org.apache.log4j.Logger;
 
 public class UsageLog4j2 {
