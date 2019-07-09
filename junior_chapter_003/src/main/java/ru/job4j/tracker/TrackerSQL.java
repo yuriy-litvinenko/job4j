@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class TrackerSQL implements ITracker, AutoCloseable {
-    private Connection connection;
+    private final Connection connection;
     private static final String CREATE_TABLE_SQL = String.join("",
             "create table if not exists items(",
             "id serial primary key, ",
@@ -29,20 +29,8 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     private static final String REPLACE_VALUE_SQL = String.join("",
             "update items set name = ?, description = ? where id = ?");
 
-    boolean init() {
-        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
-            Properties config = new Properties();
-            config.load(Objects.requireNonNull(in));
-            Class.forName(config.getProperty("driver-class-name"));
-            this.connection = DriverManager.getConnection(
-                    config.getProperty("url"),
-                    config.getProperty("username"),
-                    config.getProperty("password")
-            );
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
-        return connection != null;
+    TrackerSQL(Connection connection) {
+        this.connection = connection;
     }
 
     boolean prepare() {
@@ -56,14 +44,20 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement ps = connection.prepareStatement(ADD_VALUE_SQL)) {
+        try (PreparedStatement ps = connection.prepareStatement(ADD_VALUE_SQL, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, item.getName());
             ps.setString(2, item.getDescription());
-            ps.execute();
+            ps.executeUpdate();
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(generatedKeys.getString(1));
+                    return item;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        throw new IllegalStateException("Could not create new item");
     }
 
     @Override
