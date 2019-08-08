@@ -3,4 +3,4 @@ create table if not exists items (
   name        varchar(2000),
   description varchar(2000),
   create_date timestamptz
-)
+);
