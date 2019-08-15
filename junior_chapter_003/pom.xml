@@ -25,17 +25,33 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.6.2</version>
-                <configuration>
-                    <changeLogFile>${basedir}/db/master.xml</changeLogFile>
-                    <url>${db.url}</url>
-                    <driver>${db.driver}</driver>
-                    <username>${db.username}</username>
-                    <password>${db.password}</password>
-                    <clearCheckSums>true</clearCheckSums>
-                </configuration>
                 <executions>
                     <execution>
+                        <id>tracker-update</id>
                         <phase>process-resources</phase>
+                        <configuration>
+                            <changeLogFile>${basedir}/db/master.xml</changeLogFile>
+                            <url>${db.url}</url>
+                            <driver>${db.driver}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                            <clearCheckSums>true</clearCheckSums>
+                        </configuration>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>parser-update</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <changeLogFile>${basedir}/db/parser.xml</changeLogFile>
+                            <url>${db.url2}</url>
+                            <driver>${db.driver}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                            <clearCheckSums>true</clearCheckSums>
+                        </configuration>
                         <goals>
                             <goal>update</goal>
                         </goals>
