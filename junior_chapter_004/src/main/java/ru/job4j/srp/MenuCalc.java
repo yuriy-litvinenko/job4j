@@ -3,8 +3,8 @@ package ru.job4j.srp;
 import java.util.*;
 
 class MenuCalc {
-    private Map<String, ActionCalc> actions = new LinkedHashMap<>();
-    private static UserInput input;
+    Map<String, ActionCalc> actions = new LinkedHashMap<>();
+    static UserInput input;
 
     MenuCalc(UserInput input) {
         MenuCalc.input = input;
@@ -15,7 +15,7 @@ class MenuCalc {
         return actions.keySet().toArray(new String[0]);
     }
 
-    private void fillActions() {
+    void fillActions() {
         this.actions.put("+", new MenuCalc.AddAct("+", "Add"));
         this.actions.put("-", new MenuCalc.SubtractAct("-", "Subtrack"));
         this.actions.put("*", new MenuCalc.MultipleAct("*", "Multiple"));
@@ -35,7 +35,7 @@ class MenuCalc {
         }
     }
 
-    private static class AddAct extends BaseCalcAction {
+    static class AddAct extends BaseCalcAction {
         AddAct(String key, String name) {
             super(key, name);
         }
@@ -49,7 +49,7 @@ class MenuCalc {
         }
     }
 
-    private static class SubtractAct extends BaseCalcAction {
+    static class SubtractAct extends BaseCalcAction {
         SubtractAct(String key, String name) {
             super(key, name);
         }
@@ -63,7 +63,7 @@ class MenuCalc {
         }
     }
 
-    private static class MultipleAct extends BaseCalcAction {
+    static class MultipleAct extends BaseCalcAction {
         MultipleAct(String key, String name) {
             super(key, name);
         }
@@ -77,7 +77,7 @@ class MenuCalc {
         }
     }
 
-    private static class DivisionAct extends BaseCalcAction {
+    static class DivisionAct extends BaseCalcAction {
         DivisionAct(String key, String name) {
             super(key, name);
         }
