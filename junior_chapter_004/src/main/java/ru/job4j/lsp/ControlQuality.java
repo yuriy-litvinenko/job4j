@@ -30,4 +30,8 @@ class ControlQuality {
     void addTrash(int size) {
         storage.add(new Trash(size));
     }
+
+    List<Store> getStorage() {
+        return storage;
+    }
 }
