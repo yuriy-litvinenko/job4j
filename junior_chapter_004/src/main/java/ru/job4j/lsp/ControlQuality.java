@@ -1,7 +1,6 @@
 package ru.job4j.lsp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class ControlQuality {
 
@@ -17,6 +16,33 @@ class ControlQuality {
             }
         }
         return result;
+    }
+
+    void allocationFood(List<Food> foods) {
+        for (Food food : foods) {
+            this.putFood(food);
+        }
+    }
+
+    void resort() {
+        List<Food> foods = this.getAllFoods();
+        this.reInitAll();
+        this.allocationFood(foods);
+    }
+
+    List<Food> getAllFoods() {
+        List<Food> foods = new ArrayList<>();
+        for (Store store : storage) {
+            Collections.addAll(foods, store.getStorageList());
+        }
+        foods.removeAll(Collections.singleton(null));
+        return foods;
+    }
+
+    private void reInitAll() {
+        for (Store store : storage) {
+            store.reInitialization();
+        }
     }
 
     void addWarehouse(int size) {

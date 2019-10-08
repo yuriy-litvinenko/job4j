@@ -34,4 +34,14 @@ abstract class Store {
     boolean isNotFull() {
         return !full;
     }
+
+    Food[] getStorageList() {
+        return storageList;
+    }
+
+    void reInitialization() {
+        storageList = new Food[storageList.length];
+        this.full = false;
+        this.cur = 0;
+    }
 }

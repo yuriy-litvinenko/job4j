@@ -2,7 +2,10 @@ package ru.job4j.lsp;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -121,5 +124,36 @@ public class ControlQualityTest {
         boolean result2 = control.putFood(new Milk(
                 "Fresh milk", calcDateFromCur(-1), calcDateFromCur(40), 240, 100));
         assertThat(result2, is(false));
+    }
+
+    @Test
+    public void dynamicPutFoodstuffsThenResortAndVerificationOfStorageSize() {
+        ControlQuality control = new ControlQuality();
+        List<Food> foodList = new ArrayList<>();
+        control.addWarehouse(3);
+        control.addShop(3);
+        control.addTrash(3);
+        Food food1 = new Milk(
+                "Fresh milk", calcDateFromCur(-15), calcDateFromCur(15), 240, 100);
+        Food food2 = new Milk(
+                "Fresh milk", calcDateFromCur(-30), calcDateFromCur(5), 240, 100);
+        Food food3 = new Milk(
+                "Fresh milk", calcDateFromCur(-5), calcDateFromCur(20), 240, 100);
+        Food food4 = new Bread(
+                "White Toast", calcDateFromCur(-2), calcDateFromCur(3), 70, 30);
+        Food food5 = new Bread(
+                "White Toast", calcDateFromCur(-6), calcDateFromCur(-1), 70, 30);
+        Food food6 = new Meat(
+                "Beef ribs", calcDateFromCur(-4), calcDateFromCur(35), 450, 200);
+        foodList.add(food1);
+        foodList.add(food2);
+        foodList.add(food3);
+        foodList.add(food4);
+        foodList.add(food5);
+        foodList.add(food6);
+        control.allocationFood(foodList);
+        assertThat(control.getAllFoods().size(), is(6));
+        control.resort();
+        assertThat(control.getAllFoods().size(), is(6));
     }
 }
