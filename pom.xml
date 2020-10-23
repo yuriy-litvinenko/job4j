@@ -13,15 +13,10 @@
 	</properties>
 	
 	<modules>
-		<module>chapter_001</module>
-        <module>chapter_002</module>
-		<module>chapter_003</module>
-		<module>chapter_004</module>
-		<module>junior_chapter_001</module>
-		<module>junior_chapter_002</module>
-        <module>junior_chapter_003</module>
-        <module>junior_chapter_004</module>
-    </modules>
+		<module>01_trainee</module>
+		<module>02_junior</module>
+		<module>03_middle</module>
+	</modules>
 	
 	<build>
 		<plugins>
@@ -43,10 +38,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
 				<configuration>
-					<forkCount>2</forkCount>
-					<reuseForks>false</reuseForks>
-					<forkMode>never</forkMode>
-					<useSystemClassLoader>false</useSystemClassLoader>
+					<forkCount>3</forkCount>
+					<reuseForks>true</reuseForks>
+					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -180,9 +174,9 @@
 			<version>23.0</version>
 		</dependency>
 		<dependency>
-			<groupId>postgresql</groupId>
+			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.1-901-1.jdbc4</version>
+			<version>42.2.18</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>

@@ -1,0 +1,1 @@
+insert into params(name) VALUES ('last_run_date') on conflict (name) do nothing;

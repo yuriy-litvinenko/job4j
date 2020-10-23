@@ -1,0 +1,14 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>trainee_chapter_01</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	
+	<parent>
+		<groupId>ru.job4j</groupId>
+		<artifactId>01_trainee</artifactId>
+		<version>1.0</version>	
+	</parent>
+	
+</project>
+
