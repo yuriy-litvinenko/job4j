@@ -7,11 +7,11 @@ public class SimpleArray<T> implements Iterable {
     private Object[] objects;
     private int pos = 0;
 
-    SimpleArray(int size) {
+    public SimpleArray(int size) {
         this.objects = new Object[size];
     }
 
-    int length() {
+    public int length() {
         return pos;
     }
 
@@ -43,9 +43,9 @@ public class SimpleArray<T> implements Iterable {
     }
 
     @Override
-    @SuppressWarnings("NullableProblems")
-    public Iterator iterator() {
-        return new Iterator() {
+    @SuppressWarnings({"NullableProblems", "unchecked"})
+    public Iterator<T> iterator() {
+        return new Iterator<>() {
             private int posIt = 0;
 
             @Override
@@ -54,11 +54,11 @@ public class SimpleArray<T> implements Iterable {
             }
 
             @Override
-            public Object next() {
+            public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return objects[posIt++];
+                return (T) objects[posIt++];
             }
         };
     }
