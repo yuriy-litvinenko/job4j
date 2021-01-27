@@ -1,4 +1,4 @@
-package ru.job4j.threads;
+package ru.job4j.multithreading;
 
 public class ThreadState {
     public static void main(String[] args) {
@@ -30,7 +30,7 @@ public class ThreadState {
         }
         printStatus(first);
         printStatus(second);
-        System.out.println("All threads are terminated");
+        System.out.println("All multithreading are terminated");
     }
 
     private static void printStatus(Thread thread) {

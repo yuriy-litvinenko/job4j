@@ -1,4 +1,4 @@
-package ru.job4j.threads;
+package ru.job4j.multithreading;
 
 import net.jcip.annotations.ThreadSafe;
 import ru.job4j.generic.SimpleArray;

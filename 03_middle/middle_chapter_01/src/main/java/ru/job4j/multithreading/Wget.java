@@ -1,4 +1,4 @@
-package ru.job4j.threads;
+package ru.job4j.multithreading;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
