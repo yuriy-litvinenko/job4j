@@ -11,6 +11,9 @@ import java.util.function.Consumer;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class StartUITest {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -113,6 +116,63 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"5", item1.getName(), "y"});
         new StartUI(input, tracker, output).init();
         String expected = "" + menu + "---------- Поиск заявки по имени -----------"
+                + System.lineSeparator() + "---------- Найденные заявки -----------"
+                + System.lineSeparator() + item1 + System.lineSeparator() + item2 + System.lineSeparator();
+        assertThat(this.out.toString(), is(expected));
+    }
+
+    @Test
+    public void updateItemWithInputMock() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Новая заявка", "Описание"));
+        Input input = mock(Input.class);
+        when(input.ask("Введите идентификатор заявки: ")).thenReturn(item.getId());
+        when(input.ask("Введите новое имя заявки: ")).thenReturn("Замена");
+        when(input.ask("Введите новое описание заявки: ")).thenReturn("Заявка заменена");
+        MenuTracker menuTracker = new MenuTracker(input, tracker, output);
+        menuTracker.fillActions();
+        menuTracker.select(2);
+        assertThat(tracker.findById(item.getId()).getName(), is("Замена"));
+    }
+
+    @Test
+    public void deleteItemWithInputMock() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Новая заявка", "Описание"));
+        Input input = mock(Input.class);
+        when(input.ask(any(String.class))).thenReturn(item.getId());
+        MenuTracker menuTracker = new MenuTracker(input, tracker, output);
+        menuTracker.fillActions();
+        menuTracker.select(3);
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
+    }
+
+    @Test
+    public void findItemBiIdWithInputMock() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Новая заявка", "Описание"));
+        Input input = mock(Input.class);
+        when(input.ask(any(String.class))).thenReturn(item.getId());
+        MenuTracker menuTracker = new MenuTracker(input, tracker, output);
+        menuTracker.fillActions();
+        menuTracker.select(4);
+        String expected = "---------- Поиск заявки по идентификатору -----------"
+                + System.lineSeparator() + "---------- Данные по заявке -----------"
+                + System.lineSeparator() + item + System.lineSeparator();
+        assertThat(this.out.toString(), is(expected));
+    }
+
+    @Test
+    public void findItemBiNameWithInputMock() {
+        Tracker tracker = new Tracker();
+        Item item1 = tracker.add(new Item("Новая заявка", "Описание 1"));
+        Item item2 = tracker.add(new Item("Новая заявка", "Описание 2"));
+        Input input = mock(Input.class);
+        when(input.ask(any(String.class))).thenReturn("Новая заявка");
+        MenuTracker menuTracker = new MenuTracker(input, tracker, output);
+        menuTracker.fillActions();
+        menuTracker.select(5);
+        String expected = "---------- Поиск заявки по имени -----------"
                 + System.lineSeparator() + "---------- Найденные заявки -----------"
                 + System.lineSeparator() + item1 + System.lineSeparator() + item2 + System.lineSeparator();
         assertThat(this.out.toString(), is(expected));
